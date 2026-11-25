@@ -1,0 +1,459 @@
+﻿Build1=Default,com.bsit2i.wordle
+File1=bg.jpg
+File10=go.png
+File11=gres.png
+File12=hist1.png
+File13=hist2.png
+File14=history.bal
+File15=Layout.bal
+File16=logo.png
+File17=ls.bal
+File18=mainmenu.bal
+File19=mg_main.bal
+File2=bg.png
+File20=mg_main1.bal
+File21=mg_mainl.bal
+File22=mg_mainsav.bal
+File23=nbgm1.mp3
+File24=nbgm2.mp3
+File25=nexlOff.png
+File26=nexlOn.png
+File27=png.jpg
+File28=sett.png
+File29=settings.bal
+File3=click1.mp3
+File30=settingsOn.png
+File31=srd.png
+File32=start.png
+File33=startOff.png
+File34=subOff.png
+File35=subOn.png
+File36=surr.png
+File4=click2.mp3
+File5=cred.png
+File6=crediOn.png
+File7=credits.bal
+File8=creditsOn.png
+File9=credOn.png
+FileGroup1=New Group
+FileGroup10=New Group
+FileGroup11=New Group
+FileGroup12=New Group
+FileGroup13=New Group
+FileGroup14=Default Group
+FileGroup15=Default Group
+FileGroup16=New Group
+FileGroup17=Default Group
+FileGroup18=Default Group
+FileGroup19=Default Group
+FileGroup2=New Group
+FileGroup20=Default Group
+FileGroup21=Default Group
+FileGroup22=Default Group
+FileGroup23=Default Group
+FileGroup24=Default Group
+FileGroup25=New Group
+FileGroup26=New Group
+FileGroup27=New Group
+FileGroup28=New Group
+FileGroup29=Default Group
+FileGroup3=Default Group
+FileGroup30=New Group
+FileGroup31=New Group
+FileGroup32=New Group
+FileGroup33=New Group
+FileGroup34=New Group
+FileGroup35=New Group
+FileGroup36=New Group
+FileGroup4=Default Group
+FileGroup5=New Group
+FileGroup6=New Group
+FileGroup7=Default Group
+FileGroup8=New Group
+FileGroup9=New Group
+Group=Default Group
+Library1=core
+Library2=xui
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
+Module1=credits
+Module2=game
+Module3=gtut
+Module4=history
+Module5=loading
+Module6=MusicService
+Module7=settings
+Module8=Starter
+NumberOfFiles=36
+NumberOfLibraries=2
+NumberOfModules=8
+Version=13.1
+@EndOfDesignText@
+#Region  Activity Attributes 
+	#FullScreen: true
+	#IncludeTitle: false
+	#ApplicationLabel: WordTrickly
+	#SignKeyPassword: malakingtite
+	
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+	Dim item() As String
+	
+	Dim bg1 As MediaPlayer
+	Dim bg2 As MediaPlayer
+	Dim cl2 As MediaPlayer
+	Dim cl1 As MediaPlayer
+	Dim vl1 As Float 
+	Dim vl2 As Float 
+	Dim mods As String = ""
+	Dim tut As Int = 0
+	
+	Public datlist As List
+	Dim gp As Int = 0
+	Dim cw As Int = 0
+	Dim ts As Int = 0
+	Dim tim As String = ""
+	Dim atm As Int = 0
+	Dim usr As String = "Name: "
+	Dim sc As Int = 0
+	Dim exp As String = "IGN             Attempts No.    Time Finished     Score"
+	Dim resh As String  '= usr & "         " & tim & "            " & atm & "          " & sc
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+
+Dim tutor As Boolean = False
+
+	Private b1 As Button
+	Private b2 As Button
+	Private b3 As Button
+	Dim cl2 As MediaPlayer
+	Dim cl1 As MediaPlayer
+	Private pntut As Panel
+	Private lb1 As Label
+	Private lb2 As Label
+	Private lbs As Button
+	Private lb3 As Label
+	Private lb4 As Label
+	Private lb5 As Label
+	Private hist As Button
+	Private username As EditText
+	Private Panel2 As Panel
+	Private profn As Panel
+	Private lb6 As Label
+	Private lb7 As Label
+	Private conf As Button
+	Private pro As Panel
+	Private usern As Label
+	Private prob As Button
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	'Do not forget to load the layout file created with the visual designer. For example:
+	Activity.LoadLayout("mainmenu")
+
+	datlist.Initialize
+If usern.Text = "" Then
+	usern.Text = "Player1"
+	End If
+pro.SendToBack
+pro.Visible = False
+
+	lbs.Color = Colors.ARGB(0, 0, 0, 0)
+	conf.Color = Colors.ARGB(0, 0, 0, 0)
+	prob.Color = Colors.ARGB(0, 0, 0, 0)
+	vl1 = 0.4
+	vl2 = 0.6
+	
+	If FirstTime Then
+	cl1.initialize
+	cl1.Load(File.DirAssets, "click1.mp3")
+
+	
+	cl2.Initialize
+		cl2.Load(File.DirAssets, "click2.mp3")
+		
+		
+		If bg1.IsInitialized = False Then
+			bg1.Initialize()
+			bg1.Load(File.DirAssets, "nbgm1.mp3")
+			bg1.SetVolume(vl1, vl1)
+			bg1.Looping = True
+		End If
+
+	bg2.Initialize()
+	bg2.Load(File.DirAssets, "nbgm2.mp3")
+	bg1.SetVolume(vl1, vl1)
+	bg2.SetVolume(vl1, vl1)
+	bg2.Looping = True
+	
+	
+	cl1.Initialize()
+	cl1.Load(File.DirAssets, "click1.mp3")
+	cl1.SetVolume(vl2, vl2)
+	cl2.Initialize()
+	cl2.Load(File.DirAssets, "click1.mp3")
+	cl2.SetVolume(vl2, vl2)
+
+	
+		bg1.play
+	End If
+
+	If File.Exists(File.DirInternal, "history.txt") Then
+		datlist = File.ReadList(File.DirInternal, "history.txt")
+
+	End If
+
+	
+'	Dim data As String = vl1 & "," & vl2
+'	File.WriteString(File.DirInternal, "volume.txt", data)
+	If File.Exists(File.DirInternal, "volume.txt") Then
+		Dim savedData As String = File.ReadString(File.DirInternal, "volume.txt")
+		Dim parts() As String = Regex.Split(",", savedData)
+		Dim vol1 As Float = parts(0)
+		Dim vol2 As Float = parts(1)
+		vl1 = vol1
+		vl2 = vol2
+	End If
+
+'	If FirstTime Then
+'		If tutor = False Then
+'			ShowTutorialHighlight
+'			tutor = True
+'		End If
+'	End If
+
+lbs.Text = "Next"
+
+
+	If File.Exists(File.DirInternal, "tutorial.txt") Then
+		Dim s As String = File.ReadString(File.DirInternal, "tutorial.txt")
+		Dim isFinished As Boolean = (s.ToLowerCase = "true")
+		tutor = isFinished
+		else if s = "true" Then
+			tutor = True
+		Else If tutor = False Then
+			ShowTutorialHighlight
+			tutor = True
+	End If
+'	File.WriteString(File.DirInternal, "tutorial.txt", "true")
+If File.Exists(File.DirInternal, "username.txt") Then
+	Dim users As String = File.ReadString(File.DirInternal, "username.txt")
+	usern.Text = users
+	username.Text = users
+	usr = users
+	
+	If File.Exists(File.DirInternal, "gp.txt") Then
+		gp = File.ReadString(File.DirInternal, "gp.txt")
+		End If
+		If File.Exists(File.DirInternal, "cw.txt") Then
+			cw = File.ReadString(File.DirInternal, "cw.txt")
+		End If
+		If File.Exists(File.DirInternal, "ts.txt") Then
+			ts = File.ReadString(File.DirInternal, "ts.txt")
+		End If
+	
+	File.WriteString(File.DirInternal, "gp.txt", gp)
+	File.WriteString(File.DirInternal, "cw.txt", cw)
+	File.WriteString(File.DirInternal, "ts.txt", ts)
+	
+End If
+	Size
+End Sub
+
+Sub Size
+	Dim xx,yy As Double
+	xx=((100%x)/450)/Density
+	yy=((100%y)/ 800)/Density
+	For Each View As View In Activity.GetAllViewsRecursive
+		View.Width=(View.Width) * xx
+		View.Left=(View.Left) * xx
+		View.Height=(View.Height)* yy
+		View.Top=(View.Top)*yy
+	Next
+End Sub
+
+Sub Activity_Resume
+
+	If bg1.IsInitialized = False Then
+	bg1.Initialize()
+	bg1.Load(File.DirAssets, "nbgm1.mp3")
+	bg1.SetVolume(vl1, vl1)
+	bg1.Looping = True
+	End If
+	
+	bg2.Initialize()
+	bg2.Load(File.DirAssets, "nbgm2.mp3")
+	bg2.SetVolume(vl1, vl1)
+	bg2.Looping = True
+	
+	bg1.Play
+
+End Sub
+Sub Activity_Pause (UserClosed As Boolean)
+	bg1.pause
+	bg2.pause
+End Sub
+Private Sub b3_Click
+	cl2.play
+	StartActivity("credits")
+End Sub
+Private Sub b2_Click
+	cl1.play
+	StartActivity("settings")
+End Sub
+Private Sub b1_Click
+	gp = gp + 1
+	bg1.Stop
+	cl1.play
+usr = username.Text
+	File.WriteString(File.DirInternal, "gp.txt", gp)
+	
+	
+	StartActivity("loading")
+	mods = "game"
+End Sub
+
+Sub ShowTutorialHighlight()
+	Dim Target As View
+	' Show the overlay
+	pntut.Visible = True
+	pntut.BringToFront
+
+	' Set dark semi-transparent background
+	Dim darkBG As ColorDrawable
+	darkBG.Initialize(Colors.ARGB(180, 0, 0, 0), 0)
+	pntut.Background = darkBG
+
+	' Remove previous highlights (if any)
+	pntut.RemoveAllViews
+
+	lbs.Visible = True
+	b1.Visible = False
+	b2.Visible = False
+	b3.Visible = False
+	b1.Enabled= False
+	b2.Enabled = False
+	b3.Enabled = False
+	hist.Enabled = False
+	hist.Visible = False
+	username.Enabled = False
+	Select tut
+		Case 0:
+			lb1.Visible = True
+			lb1.BringToFront
+		Case 1:
+			lb2.BringToFront
+			lb1.Visible = False
+			lb2.Visible = True
+		Case 2:
+			lb3.BringToFront
+			lb2.Visible = False
+			lb3.Visible = True
+			b3.Visible = True
+			b3.BringToFront
+		Case 3:
+			lb6.visible = True
+			lb6.BringToFront
+			hist.BringToFront
+			hist.Visible = True
+			lb3.Visible = False
+			b3.Visible = False
+		Case 4:
+			lb6.Visible = False
+			lb7.Visible = True
+			lb7.BringToFront
+			hist.Visible = False
+			profn.BringToFront
+		Case 5
+			lb4.BringToFront
+			lb7.Visible = False
+			lb4.Visible = True
+			b2.Visible = True
+			b2.BringToFront
+			b3.Visible = False
+		Case 6
+			lb5.BringToFront
+			lb4.Visible = False
+			lb5.Visible = True
+			b1.Visible = True
+			b1.BringToFront
+			b2.Visible = False
+		Case 7
+			lb4.Visible = False
+			lb5.Visible = False
+			b1.Visible = True
+			b1.BringToFront
+			b2.Visible = True
+			b3.Visible = True
+			b1.Enabled = True
+			b2.Enabled = True
+			b3.Enabled = True
+			lbs.Enabled = False
+			lbs.Visible =False
+			pntut.Visible = False
+			hist.Enabled = True
+			hist.Visible = True
+			username.Enabled = True
+			StartActivity("gtut")
+			bg2.Play
+	End Select
+'	' Get the target position
+'	Dim r As Rect = GetViewRect(Target)
+'    
+'	' Create a transparent panel (simulated highlight area)
+'	Dim hole As Panel
+'	hole.Initialize("")
+'	pntut.AddView(hole, r.Left, r.Top, r.Width, r.Height)
+'	hole.Color = Colors.Transparent
+'	hole.Elevation = 20dip
+'
+'	' Optionally: Add a label to explain the button
+'Target.Visible = True
+'Target.BringToFront
+
+End Sub
+
+
+Private Sub lbs_Click
+	cl1.play
+	tut = tut + 1
+	ShowTutorialHighlight
+End Sub
+
+Private Sub hist_Click
+	cl1.play
+	StartActivity("history")
+End Sub
+
+Private Sub conf_Click
+
+	
+	cl1.play
+	usr = username.text
+	usern.text = username.text
+	pro.SendToBack
+	pro.Visible = False
+	
+	b1.Enabled = True
+	b2.Enabled = True
+	b3.Enabled = True
+	hist.Enabled = True
+	prob.Enabled = True
+	File.WriteString(File.DirInternal, "username.txt", usr)
+End Sub
+
+Private Sub prob_Click
+	cl1.play
+	pro.Visible = True
+	pro.BringToFront
+	b1.Enabled = False
+	b2.Enabled = False
+	b3.Enabled = False
+	hist.Enabled = False
+	prob.Enabled = False
+End Sub
